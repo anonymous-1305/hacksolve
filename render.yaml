@@ -1,0 +1,13 @@
+# Render blueprint. A persistent disk needs a paid instance; free instances lose data on restart.
+services:
+  - type: web
+    name: hacksolve
+    runtime: docker
+    plan: starter
+    healthCheckPath: /api/health
+    disk: {name: hacksolve-data, mountPath: /data, sizeGB: 1}
+    envVars:
+      - {key: AI_PROVIDER, value: auto}
+      - {key: GEMINI_API_KEY, sync: false}
+      - {key: ANTHROPIC_API_KEY, sync: false}
+      - {key: OPENAI_API_KEY, sync: false}
